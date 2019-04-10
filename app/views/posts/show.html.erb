@@ -3,6 +3,7 @@
 <% @post.comments.each do |comment| %>
     <%= comment.content%>
 <% end %>
+<% binding.pry %>
 <% @post.users.each do |user| %>
     <%= link_to user.username, user_path(user) %>
 <% end %>
