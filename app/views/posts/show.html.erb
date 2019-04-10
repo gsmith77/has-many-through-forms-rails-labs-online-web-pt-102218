@@ -3,6 +3,14 @@
 <% @post.comments.each do |comment| %>
     <%= comment.content%>
 <% end %>
-<% @post.comments.each do |comment| %>
-    <%= link_to comment.user.username, user_path(comment.user) %>
+<%= form_for @post do |f| %>
+    <%= f.fields_for :comments, @post.comments.build do |comment_field| %>
+        <%= comment_field.text_area :content %>
+    <% end %>
+    <%= f.collection_select(:user_ids, User.all, :id, :username) %>
 <% end %>
+
+#A form to add a new comment. The form should have a 
+#drop-down menu to select a user 
+#We should also be able to create a new user here 
+#and automatically associate it with the post.
