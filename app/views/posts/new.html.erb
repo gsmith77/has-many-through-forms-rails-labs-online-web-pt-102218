@@ -1,13 +1,24 @@
 <%= form_for @post do |f| %>
+  <p>
     <%= f.label "Title" %>
-    <%= f.text_field :title %>
+    <%= f.text_field :title %><br>
+    </p>
+
+    <p>
     <%= f.label "Content" %>
-    <%= f.text_area :content %>
-    <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) %>
-      <%= f.fields_for :categories, @post.categories.build do |categories_fields| %>
-        Category Name: <%= categories_fields.text_field :name %>
-      <% end %>
-    <%= f.submit "Create Post" %>
+    <%= f.text_area :content %><br>
+    </p>
+<p>
+    <% Category.all.each do |c| %>
+      <label for="category_id_<%=c.id%>"><%= c.name %></label>
+      <input type="checkbox" name="post[category_ids][]" value="<%= c.id %>" id="category_id_<%= c.id %>">
+    </p>
+      <% end %><br>
+      
+      <input type="text" id="post_categories_attributes_0_name" name="post[categories_attributes][0][name]" />
+      <input type="text" id="post_categories_attributes_1_name" name="post[categories_attributes][1][name]" />
+ 
+    <%= f.submit %>
   <% end %>
 
   

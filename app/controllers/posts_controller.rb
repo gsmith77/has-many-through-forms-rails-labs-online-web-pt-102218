@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def show
-    @post = Post.find(params[:id])
+    @post = Post.find_by(params[:id])
   end
 
   def index
@@ -17,9 +17,14 @@ class PostsController < ApplicationController
     redirect_to post
   end
 
+  def update
+    post = Post.find_by(params[:id])
+    redirect_to post
+  end
+
   private
 
   def post_params
-    params.require(:post).permit(:title, :content, category_ids:[], categories_attributes: [:name])
+    params.require(:post).permit(:title, :content, category_ids:[], categories_attributes:[:name])
   end
 end

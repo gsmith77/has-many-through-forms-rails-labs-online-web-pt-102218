@@ -1,16 +1,16 @@
-<%= @post.title%>
-<%= @post.content %>
-<% @post.comments.each do |comment| %>
-    <%= comment.content%>
-<% end %>
-<%= form_for @post do |f| %>
-    <%= f.fields_for :comments, @post.comments.build do |comment_field| %>
-        <%= comment_field.text_area :content %>
-    <% end %>
-    <%= f.collection_select(:user_ids, User.all, :id, :username) %>
+<h1> <%= @post.title%><br></h1>
+
+<p> <%= @post.content %> </p>
+
+<% @post.categories.each do |category| %><br>
+    <%= category.name%>
 <% end %>
 
-#A form to add a new comment. The form should have a 
-#drop-down menu to select a user 
-#We should also be able to create a new user here 
-#and automatically associate it with the post.
+<% @post.comments.each do |comment| %>
+    <%= comment.content%>
+<% end %><br>
+<ul>
+<% @post.users.each do |user| %>
+    <li><%= user.username %>/<li>
+</ul>
+<% end %>

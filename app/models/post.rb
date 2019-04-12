@@ -5,10 +5,11 @@ class Post < ActiveRecord::Base
   has_many :users, through: :comments
   accepts_nested_attributes_for :categories
 
-  def categories_attributes=(category_attributes)
-    category_attributes.values.each do |category_attribute|
-      category = Category.find_or_create_by(category_attribute)
-      self.categories << category
+  def categories_attributes=(categories_hashes)
+    # {"0"=>{"name"=>"new post 1"}, "1"=>{"name"=>" new post 2"}}
+    categories_hashes.values.each do |category_hash|
+      category = Category.find_or_create_by(name: category_hash[:name])
+      self.post_categories.build(:category => category)
     end
   end
 
