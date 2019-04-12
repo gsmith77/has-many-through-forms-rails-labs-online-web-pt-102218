@@ -20,8 +20,7 @@
         <%= user_fields.text_field :username %>
         <%= user_fields.text_field :email %>
     <% end %>
-    <%= f.collection_select(:user_id, User.all, :username, :id) %>
-
+    <%= f.collection_select(:user_id, User.all, :id, :username) %>
 <%= f.submit %>
 <% end %>
 
